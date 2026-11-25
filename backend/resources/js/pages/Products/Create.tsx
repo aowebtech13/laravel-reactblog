@@ -5,6 +5,9 @@ import { create } from '@/routes/products';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 
+import { Textarea } from '@/components/ui/textarea';
+import { Field, FieldLabel, Fieldset,  FieldGroup } from '@/components/ui/field';
+
 
 
 export default function Index () {
@@ -12,23 +15,30 @@ export default function Index () {
         <>
             <Head title="Create New Products" />
         <div className="w-8/12 p-4">
-            <form>
-                <div>
-                   <Label htmlFor="product name"> Name </Label>
-                   <input type="text" placeholder="EnterProduct Name"> 
-                   </input>
+            <form className="space-y-4">
+              <div>
+                <fieldset className="w-full max-w-xs">
+                    <FieldGroup>
+                        <field>
+  <fieldLabel htmlFor="Product Name" > Name</fieldLabel>
+                        <input id="product-name" type="text" placeholder="Enter Product Name" ></input>
+                        </field>
 
-                </div>
-                <div>
-                    <Label htmlFor="Product Price">Price </Label>
-                    <input type="number" placeholder="Enter product price"></input>
+                         <field>
+  <fieldLabel htmlFor="Product Name" > Price</fieldLabel>
+                        <input id="product-price" type="number" placeholder="Enter Price" ></input>
+                        </field>
+                      
+                    </FieldGroup>
 
-                </div>
+                </fieldset>
+              </div>
                  <div>
                     <Label htmlFor="Product Description">Description </Label>
-                    <input type="text" placeholder="Enter product Description"></input>
+                   <Textarea  placeholder="Enter Description"/>
 
                 </div>
+                <Button type="submit"> Add Product</Button>
 
 
             </form>
