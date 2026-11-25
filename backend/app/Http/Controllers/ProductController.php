@@ -9,7 +9,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Products/Index'[]);
+        return Inertia::render('Products/Index', [ ]);
     }
     //
 }
