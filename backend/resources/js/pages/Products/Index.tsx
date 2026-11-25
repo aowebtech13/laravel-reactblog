@@ -9,6 +9,7 @@ export default function Index () {
         <>
             <Head title="Products" />
          <div className="m-4">
+            <h1 className="mb-4 text-xl font-semibold">Welcome adeyemi</h1>
             <Link href={route('products.create')}><Button>Create A Product</Button></Link>
          </div>
         </>
