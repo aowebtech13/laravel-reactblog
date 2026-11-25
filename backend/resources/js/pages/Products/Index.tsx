@@ -11,7 +11,7 @@ export default function Index () {
             <Head title="Products" />
          <div className="m-4">
           
-            <Link href={create.url()}><Button>Create A Product</Button></Link>
+            <Link href={create.url()}><Button>My Products</Button></Link>
          </div>
         </>
     );
