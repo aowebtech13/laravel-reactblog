@@ -3,6 +3,7 @@ import Dashboard from '../dashboard';
 import { Button } from '@/components/ui/button';
 import { create } from '@/routes/products';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 
 
