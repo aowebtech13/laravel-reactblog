@@ -1,11 +1,13 @@
 import { Head, Link } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
-import { create } from '@/routes/products';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Field, FieldLabel, FieldSet, FieldGroup } from '@/components/ui/field';
 import { useForm } from '@inertiajs/react';
+import { AlertCircle } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+
 
 export default function Index () {
     const {data, setData, post, processing, errors } =useForm({
@@ -14,10 +16,10 @@ export default function Index () {
         description: '',
 
     });
-    const handleSubmit = (e: React.FormEvent) =>{
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(data);
-    }
+        post(route('products.store'));
+    };
 
 
 
@@ -31,16 +33,21 @@ export default function Index () {
         <div className="w-8/12 p-4">
             <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Display errors*/}
-                {object.keys(errors).length > 0 &&(
+                {Object.keys(errors).length > 0 &&(
                    <Alert>
-  <InfoIcon />
-  <AlertTitle>Heads up!</AlertTitle>
+ <AlertCircle />
+  <AlertTitle>Errors!</AlertTitle>
   <AlertDescription>
-    You can add components and dependencies to your app using the cli.
+    <ul>
+        {Object.entries(errors).map(([key,message]) =>(
+            <li key={key}>{message as string}
+
+            </li>
+        ))}
+    </ul>
+    
   </AlertDescription>
-  <AlertAction>
-    <Button variant="outline">Enable</Button>
-  </AlertAction>
+  
 </Alert> 
                 )}
 
