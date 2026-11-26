@@ -30,6 +30,20 @@ export default function Index () {
             <Head title="Create New Products" />
         <div className="w-8/12 p-4">
             <form onSubmit={handleSubmit} className="space-y-4">
+                {/* Display errors*/}
+                {object.keys(errors).length > 0 &&(
+                   <Alert>
+  <InfoIcon />
+  <AlertTitle>Heads up!</AlertTitle>
+  <AlertDescription>
+    You can add components and dependencies to your app using the cli.
+  </AlertDescription>
+  <AlertAction>
+    <Button variant="outline">Enable</Button>
+  </AlertAction>
+</Alert> 
+                )}
+
               <FieldSet className="w-full">
                   <FieldGroup>
                     <Field>
