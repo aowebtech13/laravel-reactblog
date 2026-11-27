@@ -22,11 +22,10 @@ public function store(Request $request){
         'name' => 'required|string|max:255',
         'price' => 'required|numeric',
         'description' => 'nullable|string',
-       ]);
+       ]); 
        
-       Product::create($validated);
-       
-       return redirect()->route('products.index');
-   }
+       Product::create($request->all()) ;
+       return redirect()-> route ('products.index') -> with ('message', 'product created succesfully');
     
+    }
 }
