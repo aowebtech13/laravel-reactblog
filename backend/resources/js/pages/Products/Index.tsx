@@ -13,33 +13,35 @@ interface PageProps {
 
 
 export default function Index () {
-    const {flash} =usePage().props as PageProps;
+    const { flash } = usePage().props as PageProps;
     return (
         <>
             <Head title="Products" />
-         <div className="m-4">
-          
-            <Link href={create.url()}><Button>Create a Product</Button></Link>
-         </div>
-         <div className='m-4'>
-            {flash.message && (
-                  <Alert>
- <AlertCircle />
-  <AlertTitle>Errors!</AlertTitle>
-  <AlertDescription>
-    <ul>
-        {Object.entries(errors).map(([key,message]) =>(
-            <li key={key}>{message as string}
-
-            </li>
-        ))}
-    </ul>
-    
-  </AlertDescription>
-  
-</Alert> 
-            )
-         </div>
+            <div className="m-4">
+                <Link href="/products/create"><Button>Create a Product</Button></Link>
+            </div>
+            <div className='m-4'>
+                {flash?.success && (
+                    <Alert className="bg-green-50 border-green-200">
+                        <AlertCircle className="text-green-500" />
+                        <AlertTitle>Success!</AlertTitle>
+                        <AlertDescription>{flash.success}</AlertDescription>
+                    </Alert>
+                )}
+                {flash?.errors && (
+                    <Alert>
+                        <AlertCircle />
+                        <AlertTitle>Errors!</AlertTitle>
+                        <AlertDescription>
+                            <ul>
+                                {Object.entries(flash.errors).map(([key, message]) => (
+                                    <li key={key}>{message as string}</li>
+                                ))}
+                            </ul>
+                        </AlertDescription>
+                    </Alert>
+                )}
+            </div>
         </>
     );
 }
@@ -51,9 +53,4 @@ Index.layout = {
             href: '/products',
         },
     ],
-    interface PageProps{
-      flash:   {
-        message?: string
-      }
-    }
 };
