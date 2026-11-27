@@ -1,4 +1,4 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link, usePage, router } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
@@ -30,6 +30,11 @@ interface product {
 
 export default function Index() {
     const { products, flash } = usePage().props as PageProps;
+    const handleDelete = (id: number, name: string) => {
+        if (confirm(`Do you want to delete ${name}?`)) {
+            router.delete(route('products.destroy', id));
+        }
+    };
     return (
         <>
             <Head title="Products" />
@@ -66,6 +71,8 @@ export default function Index() {
                             <TableHead>Name</TableHead>
                             <TableHead>Price</TableHead>
                             <TableHead>Description</TableHead>
+                              <TableHead className="text-center">Action</TableHead>
+                               
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -74,6 +81,9 @@ export default function Index() {
                                 <TableCell className="font-medium">{product.name}</TableCell>
                                 <TableCell>${product.price}</TableCell>
                                 <TableCell>{product.description}</TableCell>
+                                <TableCell className="text-center"> 
+                                    <Button onClick={() => handleDelete(product.id, product.name)} className="bg-red-500 hover:bg-red-700">Delete</Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
