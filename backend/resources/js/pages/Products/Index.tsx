@@ -2,18 +2,34 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import { Button } from '@/components/ui/button';
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import {
+    Table,
+    TableBody,
+    TableCaption,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/table"
 
 interface PageProps {
-  flash?: {
-    success?: string;
-    errors?: Record<string, string>;
-  };
+    flash?: {
+        success?: string;
+        errors?: Record<string, string>;
+
+    };
+    products: product[]
 }
 
+interface product {
+    id: number,
+    name: string,
+    price: number,
+    description: string,
+}
 
-
-export default function Index () {
-    const { flash } = usePage().props as PageProps;
+export default function Index() {
+    const { products, flash } = usePage().props as PageProps;
     return (
         <>
             <Head title="Products" />
@@ -42,6 +58,27 @@ export default function Index () {
                     </Alert>
                 )}
             </div>
+            {products.length > 0 && (
+                <Table>
+                    <TableCaption>A list of your products.</TableCaption>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead>Name</TableHead>
+                            <TableHead>Price</TableHead>
+                            <TableHead>Description</TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {products.map((product) => (
+                            <TableRow key={product.id}>
+                                <TableCell className="font-medium">{product.name}</TableCell>
+                                <TableCell>${product.price}</TableCell>
+                                <TableCell>{product.description}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            )}
         </>
     );
 }

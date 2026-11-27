@@ -10,7 +10,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Products/Index', []);
+        $products = Product::latest()->get();
+        return Inertia::render('Products/Index', compact('products'));
     }
 
     public function create()
@@ -24,8 +25,8 @@ public function store(Request $request){
         'description' => 'nullable|string',
        ]); 
        
-       Product::create($request->all()) ;
-       return redirect()-> route ('products.index') -> with ('message', 'product created succesfully');
+Product::create($validated);
+        return redirect()->route('products.index')->with('success', 'Product created successfully');
     
     }
 }
